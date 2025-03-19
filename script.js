@@ -14,13 +14,15 @@ if (lang == "en") {
     "Sunday"
   );
 } else if ((lang = "ru")) {
-  "понедельник",
+  console.log(
+    "понедельник",
     "вторник",
     "среда",
     "четверг",
     "пятница",
     "суббота",
-    "воскресенье";
+    "воскресенье"
+  );
 } else {
   console.log("Что-то пошло не так");
 }
@@ -75,8 +77,7 @@ let arr = [
   ],
 ];
 
-let langIndex = lang == "ru" ? 0 : 1;
-
+let langIndex = lang === "ru" ? 0 : 1;
 console.log(arr[langIndex].join(", "));
 
 // 2
