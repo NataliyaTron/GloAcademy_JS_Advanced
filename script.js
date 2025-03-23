@@ -77,7 +77,8 @@ let arr = [
   ],
 ];
 
-let langIndex = lang === "ru" ? 0 : 1;
+let langIndex = lang == "ru" ? 0 : 1;
+
 console.log(arr[langIndex].join(", "));
 
 // 2
