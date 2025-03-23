@@ -1,10 +1,21 @@
-const num = 266219;
+"use strict";
 
-const arr = num.toString().split("");
-const multiply = arr.reduce((acc, item) => acc * item, 1);
-console.log(multiply);
+const checkString = (str) => {
+  if (typeof str !== "string") {
+    console.log("Ошибка! В качестве аргумента передана не строка");
+    return;
+  } else {
+    str = str.trim();
 
-const newNum = multiply ** 3;
-const newArr = newNum.toString().split("").slice(0, 2);
+    if (str.length > 30) {
+      str = str.slice(0, 30) + "...";
+    }
+    return str;
+  }
+};
 
-console.log(newArr.toString());
+console.log(
+  checkString(
+    " Скажи-ка, дядя, ведь не даром Москва, спаленная пожаром, Французу отдана?  "
+  )
+);
