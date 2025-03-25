@@ -1,10 +1,26 @@
-const num = 266219;
+"use strict";
 
-const arr = num.toString().split("");
-const multiply = arr.reduce((acc, item) => acc * item, 1);
-console.log(multiply);
+const getAllServicePrices = function () {
+  let sum = 0;
 
-const newNum = multiply ** 3;
-const newArr = newNum.toString().split("").slice(0, 2);
+  for (let i = 0; i < 2; i++) {
+    let service = prompt("Какой дополнительный тип услуги нужен?");
 
-console.log(newArr.toString());
+    let price;
+    do {
+      price = prompt("Сколько это будет стоить?");
+
+      if (price === null) {
+        return "Вы отменили ввод";
+      }
+
+      price = price.trim();
+    } while (price === "" || isNaN(price));
+
+    sum += Number(price);
+  }
+
+  return sum;
+};
+
+console.log(getAllServicePrices());
