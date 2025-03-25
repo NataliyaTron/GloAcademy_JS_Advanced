@@ -1,21 +1,26 @@
 "use strict";
 
-const checkString = (str) => {
-  if (typeof str !== "string") {
-    console.log("Ошибка! В качестве аргумента передана не строка");
-    return;
-  } else {
-    str = str.trim();
+const getAllServicePrices = function () {
+  let sum = 0;
 
-    if (str.length > 30) {
-      str = str.slice(0, 30) + "...";
-    }
-    return str;
+  for (let i = 0; i < 2; i++) {
+    let service = prompt("Какой дополнительный тип услуги нужен?");
+
+    let price;
+    do {
+      price = prompt("Сколько это будет стоить?");
+
+      if (price === null) {
+        return "Вы отменили ввод";
+      }
+
+      price = price.trim();
+    } while (price === "" || isNaN(price));
+
+    sum += Number(price);
   }
+
+  return sum;
 };
 
-console.log(
-  checkString(
-    " Скажи-ка, дядя, ведь не даром Москва, спаленная пожаром, Французу отдана?  "
-  )
-);
+console.log(getAllServicePrices());
