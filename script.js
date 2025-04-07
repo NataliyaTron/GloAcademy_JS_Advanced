@@ -1,26 +1,51 @@
 "use strict";
 
-const getAllServicePrices = function () {
-  let sum = 0;
+const guessNumber = () => {
+  const botNumber = Math.floor(Math.random() * 100) + 1;
+  let attempts = 10;
 
-  for (let i = 0; i < 2; i++) {
-    let service = prompt("Какой дополнительный тип услуги нужен?");
-
-    let price;
-    do {
-      price = prompt("Сколько это будет стоить?");
-
-      if (price === null) {
-        return "Вы отменили ввод";
+  const checkNumber = () => {
+    if (attempts === 0) {
+      if (confirm("Попытки закончились, хотите сыграть еще?")) {
+        guessNumber();
+      } else {
+        alert("Спасибо за игру!");
       }
+      return;
+    }
 
-      price = price.trim();
-    } while (price === "" || isNaN(price));
+    let userInput = prompt(
+      "Угадай число от 1 до 100. Осталось попыток - " + attempts
+    );
 
-    sum += Number(price);
-  }
+    if (userInput === null) {
+      alert("Игра окончена");
+      return;
+    }
 
-  return sum;
+    const userNumber = +userInput;
+
+    if (isNaN(userNumber)) {
+      alert("Введи число!");
+      checkNumber();
+      return;
+    } else if (userNumber > botNumber) {
+      attempts--;
+      alert("Загаданное число меньше, осталось попыток " + attempts);
+      checkNumber();
+    } else if (userNumber < botNumber) {
+      attempts--;
+      alert("Загаданное число больше, осталось попыток " + attempts);
+      checkNumber();
+    } else {
+      if (confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) {
+        guessNumber();
+      } else {
+        alert("Спасибо за игру!");
+      }
+    }
+  };
+  checkNumber();
 };
 
-console.log(getAllServicePrices());
+guessNumber();
