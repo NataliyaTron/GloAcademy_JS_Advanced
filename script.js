@@ -1,51 +1,33 @@
 "use strict";
 
-const guessNumber = () => {
-  const botNumber = Math.floor(Math.random() * 100) + 1;
-  let attempts = 10;
+// Создаем массив дней недели
+const week = [
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+  "Воскресенье",
+];
 
-  const checkNumber = () => {
-    if (attempts === 0) {
-      if (confirm("Попытки закончились, хотите сыграть еще?")) {
-        guessNumber();
-      } else {
-        alert("Спасибо за игру!");
-      }
-      return;
-    }
+// Получаем текущую дату
+let date = new Date();
+// Создание элемента <div>, но на данный момент этот элемент еще не добавлен в DOM (Document Object Model) и не отображается на странице.
+let div = document.createElement("div");
+//Присвоение класса
+div.className = "week";
+// Установка внутреннего HTML-содержимое элемента <div>.
+div.innerHTML = "";
 
-    let userInput = prompt(
-      "Угадай число от 1 до 100. Осталось попыток - " + attempts
-    );
+for (let key in week) {
+  if (week[key] === "Суббота" || week[key] === "Воскресенье") {
+    div.innerHTML += "<i>" + week[key] + "</i>" + "</br>";
+  } else if (key == date.getDay() - 1) {
+    div.innerHTML += "<b>" + week[key] + "</b>" + "</br>";
+  } else {
+    div.innerHTML += "<span>" + week[key] + "</span>" + "</br>";
+  }
+}
 
-    if (userInput === null) {
-      alert("Игра окончена");
-      return;
-    }
-
-    const userNumber = +userInput;
-
-    if (isNaN(userNumber)) {
-      alert("Введи число!");
-      checkNumber();
-      return;
-    } else if (userNumber > botNumber) {
-      attempts--;
-      alert("Загаданное число меньше, осталось попыток " + attempts);
-      checkNumber();
-    } else if (userNumber < botNumber) {
-      attempts--;
-      alert("Загаданное число больше, осталось попыток " + attempts);
-      checkNumber();
-    } else {
-      if (confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?")) {
-        guessNumber();
-      } else {
-        alert("Спасибо за игру!");
-      }
-    }
-  };
-  checkNumber();
-};
-
-guessNumber();
+document.body.append(div);
